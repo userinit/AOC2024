@@ -1,3 +1,7 @@
+# Imports
+import bisect # binary search algorithm
+
+# Part One
 list1 = []
 list2 = []
 distanceSum = 0
@@ -13,4 +17,15 @@ list2.sort()
 for i in range(len(list1)):
     distance = list1[i] - list2[i]
     distanceSum += abs(distance)
-print(distanceSum)
+print(f"Sum of distances is: {distanceSum}")
+
+# Part Two
+totalSimilarityScore = 0
+
+for i in range(len(list1)):
+    startIndex = bisect.bisect_left(list2, list1[i])
+    endIndex = bisect.bisect_right(list2, list1[i])
+    occurences = endIndex - startIndex
+    similarityScore = list1[i] * occurences
+    totalSimilarityScore += similarityScore
+print(f"The similarity score is: {totalSimilarityScore}")
