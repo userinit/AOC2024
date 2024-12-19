@@ -1,6 +1,8 @@
 import re
 import numpy as np
 
+# Task 1
+
 lineArr = []
 matrixCreated = False
 totalInstances = 0
@@ -45,8 +47,23 @@ def countVerticals(inputtedMatrix):
         totalVerticals += ups + downs
     return totalVerticals
 
-
+print(len(matrix))
 totalInstances += countVerticals(transposedMatrix)
 totalInstances += countDiagonals(matrix) + countDiagonals(flippedMatrixLR)
 
-print(f"The amount of times XMAS was found in the wordsearch was {totalInstances}")
+print(f"The amount of times \"XMAS\" was found in the wordsearch was {totalInstances}")
+
+# Task 2
+
+totalInstances = 0
+def findxmas(matrix):
+    xmas = 0
+    for x in range(len(matrix)): # iterate over rows
+        for y in range(len(matrix)): # iterate over cols
+            if matrix[x,y] == "A":
+                if x-1 >= 0 and x+1 <= len(matrix) - 1 and y-1 >= 0 and y+1 <= len(matrix) - 1: # square matrix so y can be compared to horizontal length
+                    if ((matrix[x-1,y+1] == "S" and matrix[x+1,y-1] == "M") or (matrix[x-1, y+1] == "M" and matrix[x+1,y-1] == "S")) and ((matrix[x+1,y+1] == "S" and matrix[x-1,y-1] == "M") or (matrix[x+1,y+1] == "M" and matrix[x-1,y-1] == "S")):
+                        xmas += 1
+    return xmas
+
+print(f"The amount of times an X-\"MAS\" was found in the wordsearch was {findxmas(matrix)}")
